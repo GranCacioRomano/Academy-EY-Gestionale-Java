@@ -30,27 +30,61 @@ public class Gestionale {
                     System.out.println("Arrivederci!");
                 }
                 default -> System.out.println("Opzione non valida!");
-            }     
+            }
         }
     }
+
     private static void aggiungiStudente() {
-        
+        System.out.println("Inserisci il nome dello studente: ");
+        String nome = scanner.next();
+
+        if (RegistroStudentiVoti.containsKey(nome)) {
+            System.out.println("Lo studente " + nome + " è già presente nel registro!");
+        } else {
+            System.out.println("Vuoi inserire subito i voti di " + nome + "? (s/n)");
+            scanner.nextLine();
+            String risposta = scanner.nextLine().toLowerCase();
+
+            ArrayList<Integer> voti;
+
+            if (risposta.equals("s")) {
+                voti = inserisciVoti();
+            } else {
+                voti = new ArrayList<>();
+            }
+            RegistroStudentiVoti.put(nome, voti);
+            System.out.println("Lo studente " + nome + " è stato aggiunto al registro!");
+        }
     }
 
     private static void modificaStudente() {
-        
+
+
     }
 
     private static void eliminaStudente() {
-        
+
     }
 
     private static void visualizzaStudenti() {
-        
+
     }
 
     private static ArrayList<Integer> inserisciVoti() {
-        return null;
+        ArrayList<Integer> voti = new ArrayList<>();
+        while (true) {
+            System.out.println("Inserisci un voto (0 per terminare): ");
+            int voto = scanner.nextInt();
+            if (voto == 0) {
+                break;
+            }
+            if (voto > 0 && voto < 11) {
+                voti.add(voto);
+            } else {
+                System.out.println("Voto non valido!");
+            }
+        }
+        return voti;
     }
 
     private static double calcolaMedia(ArrayList<Integer> voti) {
