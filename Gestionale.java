@@ -67,7 +67,15 @@ public class Gestionale {
     }
 
     private static void visualizzaStudenti() {
-
+        if (RegistroStudentiVoti.isEmpty()) {
+        System.out.println("Nessuno studente registrato.");
+        return;
+        }
+        System.out.println("\n--- Elenco Studenti ---");
+        for (String nome : RegistroStudentiVoti.keySet()) {
+        ArrayList<Integer> voti = RegistroStudentiVoti.get(nome);
+        System.out.printf("%s - Media voti: %.2f%n", nome, calcolaMedia(voti));
+        }
     }
 
     private static ArrayList<Integer> inserisciVoti() {
