@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Gestionale {
     private static HashMap<String, ArrayList<Integer>> RegistroStudentiVoti = new HashMap<>();
@@ -21,7 +19,10 @@ public class Gestionale {
             int scelta = scanner.nextInt();
 
             switch (scelta) {
-                case 1 -> aggiungiStudente();
+                case 1 -> {
+                    scanner.nextLine();
+                    aggiungiStudente(scanner);
+                }
                 case 2 -> modificaStudente();
                 case 3 -> eliminaStudente();
                 case 4 -> visualizzaStudenti();
@@ -33,8 +34,21 @@ public class Gestionale {
             }     
         }
     }
-    private static void aggiungiStudente() {
+    private static void aggiungiStudente(Scanner scanner) {
+
+        System.out.println("Inserire il nome e cognome dello studente");
+        String nome = scanner.nextLine();
+        System.out.println("Quanti voti vuoi inserire?");
+        int scelta = scanner.nextInt();
+        ArrayList<Integer> voti = new ArrayList<>();
         
+        if(scelta != 0 && scelta>0)
+            voti = inserisciVoti(scanner, scelta);
+        else
+            RegistroStudentiVoti.put(nome, new ArrayList<>());
+
+        RegistroStudentiVoti.put(nome, voti);
+
     }
 
     private static void modificaStudente() {
@@ -49,8 +63,20 @@ public class Gestionale {
         
     }
 
-    private static ArrayList<Integer> inserisciVoti() {
-        return null;
+    private static ArrayList<Integer> inserisciVoti(Scanner scanner, int scelta) {
+        ArrayList<Integer> voti = new ArrayList<>(); 
+        
+        for (int i = 0; i<scelta; i++) {
+            System.out.println("Inserisci un voto da 1 a 10");
+            int voto = Integer.parseInt(scanner.nextLine());
+            if (voto == -1) break;
+            if (voto >= 1 && voto <= 10) 
+                voti.add(scanner.nextInt());
+            else System.out.println("Voto non valido");
+
+        }
+
+        return voti;
     }
 
     private static double calcolaMedia(ArrayList<Integer> voti) {
