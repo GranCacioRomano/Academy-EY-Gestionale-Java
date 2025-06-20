@@ -33,4 +33,27 @@ public class Gestionale {
             }     
         }
     }
+    private static void aggiungiStudente() {
+        
+    }
+
+    private static void modificaStudente() {
+        
+    }
+
+    private static void eliminaStudente() {
+        
+    }
+
+    private static void visualizzaStudenti() {
+        
+    }
+
+    private static ArrayList<Integer> inserisciVoti() {
+        return null;
+    }
+
+    private static double calcolaMedia(ArrayList<Integer> voti) {
+        return 0;
+    }
 }
