@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Gestionale {
+    
     private static HashMap<String, ArrayList<Integer>> RegistroStudentiVoti = new HashMap<>();
     private static Scanner scanner = new Scanner(System.in);
 
