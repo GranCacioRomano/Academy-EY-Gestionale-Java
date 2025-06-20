@@ -78,7 +78,7 @@ public class Gestionale {
         }
     }
 
-    private static ArrayList<Integer> inserisciVoti() {
+    private static ArrayList<Integer> inserisciVoti() { // concatenare gli if.
         ArrayList<Integer> voti = new ArrayList<>();
         while (true) {
             System.out.println("Inserisci un voto (0 per terminare): ");
@@ -96,6 +96,13 @@ public class Gestionale {
     }
 
     private static double calcolaMedia(ArrayList<Integer> voti) {
-        return 0;
+        if (voti.isEmpty()) {
+            return 0;
+        }
+        int somma = 0;
+        for (int voto : voti) {
+            somma += voto;
+        }
+        return (double) somma / voti.size();
     }
 }
