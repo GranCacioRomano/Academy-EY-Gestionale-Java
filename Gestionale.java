@@ -31,9 +31,10 @@ public class Gestionale {
                     System.out.println("Arrivederci!");
                 }
                 default -> System.out.println("Opzione non valida!");
-            }     
+            }
         }
     }
+<<<<<<< HEAD
     private static void aggiungiStudente(Scanner scanner) {
 
         System.out.println("Inserire il nome e cognome dello studente");
@@ -49,20 +50,54 @@ public class Gestionale {
 
         RegistroStudentiVoti.put(nome, voti);
 
+=======
+
+    private static void aggiungiStudente() {
+        System.out.println("Inserisci il nome dello studente: ");
+        String nome = scanner.next();
+
+        if (RegistroStudentiVoti.containsKey(nome)) {
+            System.out.println("Lo studente " + nome + " è già presente nel registro!");
+        } else {
+            System.out.println("Vuoi inserire subito i voti di " + nome + "? (s/n)");
+            scanner.nextLine();
+            String risposta = scanner.nextLine().toLowerCase();
+
+            ArrayList<Integer> voti;
+
+            if (risposta.equals("s")) {
+                voti = inserisciVoti();
+            } else {
+                voti = new ArrayList<>();
+            }
+            RegistroStudentiVoti.put(nome, voti);
+            System.out.println("Lo studente " + nome + " è stato aggiunto al registro!");
+        }
+>>>>>>> origin/MarcoFalconetti
     }
 
     private static void modificaStudente() {
-        
+
+
     }
 
     private static void eliminaStudente() {
-        
+
     }
 
     private static void visualizzaStudenti() {
-        
+        if (RegistroStudentiVoti.isEmpty()) {
+        System.out.println("Nessuno studente registrato.");
+        return;
+        }
+        System.out.println("\n--- Elenco Studenti ---");
+        for (String nome : RegistroStudentiVoti.keySet()) {
+        ArrayList<Integer> voti = RegistroStudentiVoti.get(nome);
+        System.out.printf("%s - Media voti: %.2f%n", nome, calcolaMedia(voti));
+        }
     }
 
+<<<<<<< HEAD
     private static ArrayList<Integer> inserisciVoti(Scanner scanner, int scelta) {
         ArrayList<Integer> voti = new ArrayList<>(); 
         
@@ -76,10 +111,33 @@ public class Gestionale {
 
         }
 
+=======
+    private static ArrayList<Integer> inserisciVoti() { // concatenare gli if.
+        ArrayList<Integer> voti = new ArrayList<>();
+        while (true) {
+            System.out.println("Inserisci un voto (0 per terminare): ");
+            int voto = scanner.nextInt();
+            if (voto == 0) {
+                break;
+            }
+            if (voto > 0 && voto < 11) {
+                voti.add(voto);
+            } else {
+                System.out.println("Voto non valido!");
+            }
+        }
+>>>>>>> origin/MarcoFalconetti
         return voti;
     }
 
     private static double calcolaMedia(ArrayList<Integer> voti) {
-        return 0;
+        if (voti.isEmpty()) {
+            return 0;
+        }
+        int somma = 0;
+        for (int voto : voti) {
+            somma += voto;
+        }
+        return (double) somma / voti.size();
     }
 }
