@@ -21,7 +21,7 @@ public class Gestionale {
             switch (scelta) {
                 case 1 -> {
                     scanner.nextLine();
-                    aggiungiStudente(scanner);
+                    aggiungiStudente();
                 }
                 case 2 -> modificaStudente();
                 case 3 -> eliminaStudente();
@@ -69,11 +69,18 @@ public class Gestionale {
     }
 
     private static void visualizzaStudenti() {
-
+        if (RegistroStudentiVoti.isEmpty()) {
+        System.out.println("Nessuno studente registrato.");
+        return;
+        }
+        System.out.println("\n--- Elenco Studenti ---");
+        for (String nome : RegistroStudentiVoti.keySet()) {
+        ArrayList<Integer> voti = RegistroStudentiVoti.get(nome);
+        System.out.printf("%s - Media voti: %.2f%n", nome, calcolaMedia(voti));
+        }
     }
 
-
-    private static ArrayList<Integer> inserisciVoti() {
+    private static ArrayList<Integer> inserisciVoti() { // concatenare gli if.
         ArrayList<Integer> voti = new ArrayList<>();
         while (true) {
             System.out.println("Inserisci un voto (0 per terminare): ");
@@ -91,6 +98,13 @@ public class Gestionale {
     }
 
     private static double calcolaMedia(ArrayList<Integer> voti) {
-        return 0;
+        if (voti.isEmpty()) {
+            return 0;
+        }
+        int somma = 0;
+        for (int voto : voti) {
+            somma += voto;
+        }
+        return (double) somma / voti.size();
     }
 }
